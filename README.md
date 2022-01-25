@@ -76,7 +76,9 @@ npm run lint
 
  ##### 4. Structure of BDD feature files
     
-    ├── cypress                    
+    ├── cypress   
+    │         └── pageobjects  			# Page objects folder
+    │         └── support			# Step definitions folder
     │         └── integration          
     │                   └
     │                   └── features                # BDD features folder
