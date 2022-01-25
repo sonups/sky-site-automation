@@ -10,6 +10,7 @@ import { editorialPanel } from '../../pageobjects/editorialPanel'
 
 Given('I am on the home page', () => {
   // Cypress.Cookies.debug(true);
+  cy.clearCookies()
   cy.visit("https://www.sky.com")
   cookieManage.acceptCookies();
   cy.title().should('eq','Sky Glass - The New 4k TV From Sky | Sky Broadband, TV & Mobile | Sky.com');
@@ -36,6 +37,7 @@ When('I try to sign in with invalid credentials', () => {
 
 Given('I am on the {string} page', (url) => {
   // Cypress.Cookies.debug(true);
+  cy.clearCookies()
   cy.visit(url);
   cookieManage.acceptCookies();
   cy.title().should('eq','Latest Sky TV deals for new customers | Sky.com');
