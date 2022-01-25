@@ -21,14 +21,14 @@
         script {
           try {
             sh &apos;&apos;&apos;
-                    docker kill jenkins-sky&apos;&apos;&apos;
+                    docker kill sky-site-automations&apos;&apos;&apos;
                         } catch (err) {
             echo err.getMessage()
           }
 
           try {
             sh &apos;&apos;&apos;
-                    docker rm jenkins-sky&apos;&apos;&apos;
+                    docker rm sky-site-automations&apos;&apos;&apos;
                         } catch (err) {
             echo err.getMessage()
           }
