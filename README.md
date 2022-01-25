@@ -191,15 +191,6 @@ The job **Build_cypress_tests_docker_image** builds the docker image required to
    <img src="https://raw.githubusercontent.com/sonups/sky-site-automation/master/pictures/jenkins-console-output.png" alt="Logo" width="600" height="200">
    </p>
 
-<!-- EXECUTING THE TESTS IN AZURE CLOUD -->
-## 4. Running tests in Jenkins hosted in Azure cloud VM
-
-Open the URL http://40.80.88.6/
-
-All jobs here are same as Jenkins instance we setup earlier using docker in local
-
-Jenkins login credentials can be found in Email
-
 
 <!-- CONTACT -->
 # Contact
