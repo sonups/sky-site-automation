@@ -1,0 +1,54 @@
+{
+  "name": "sky-site-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Sonu Sadasivan",
+  "license": "Personal Use",
+  "scripts": {
+    "cucumber": "node_modules/.bin/cypress-tags run -r mochawesome",
+    "cucumber-run-specific-sample": "node_modules/.bin/cypress-tags run -e TAGS=\"@rest-tests\"",
+    "cucumber-run-specific-tags": "node_modules/.bin/cypress-tags run",
+    "test2": "NODE_ENV=production karma start",
+    "build": "npm run lint",
+    "start": "serve --listen ${PORT:-8080}",
+    "types": "tsc --noEmit",
+    "lint": "eslint --fix cypress/**/*.js",
+    "test": "npx cypress run --record --key ab295972-7dbd-4ff6-b1ff-4ddb934c10d0 -s 'cypress/integration/features/sky.feature' -r mochawesome --reporter-options 'reportDir=cypress/report/mochawesome-report,overwrite=false,html=true,json=true,timestamp=mmddyyyy_HHMMss'",
+    "pretest": "npm run lint && npm run types",
+    "test-mochawesomereport": "cypress run -r mochawesome -s cypress/integration/features/sky.feature",
+    "test-allurereport": "cypress run -r mocha-allure-reporter -s cypress/integration/features/sky.feature",
+    "test-htmlreport": "cypress run -s cypress/integration/features/sky.feature",
+    "report": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+    "test-run-allure-report": "npm run test-allurereport && npm run report",
+    "cy-open": "npx cypress open",
+    "cy-run-headless": "cypress run",
+    "cy-run-chrome": "cypress run --browser chrome",
+    "cy-run-firefox": "cypress run --browser firefox"
+  },
+  "dependencies": {
+    "allure-commandline": "^2.0.0",
+    "eslint": "^7.25.0",
+    "cypress-cucumber-preprocessor": "^4.1.0",
+    "cypress-image-snapshot": "^4.0.1",
+    "cypress-visual-regression": "^1.5.7",
+    "cypress-xpath": "^1.6.2",
+    "mocha-allure-reporter": "^1.4.0"
+  },
+  "devDependencies": {
+    "cypress": "^7.1.0",
+    "cypress-iframe": "^1.0.1",
+    "cypress-multi-reporters": "^1.5.0",
+    "mochawesome": "^6.2.2"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": false,
+    "stepDefinitions": "cypress/support/step_definitions",
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "./cucumber-json",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
+  }
+}

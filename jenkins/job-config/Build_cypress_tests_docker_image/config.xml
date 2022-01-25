@@ -1,0 +1,46 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.40">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.8.4"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.8.4">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.90">
+    <script>pipeline {
+    agent any
+    stages {
+        stage(&apos;Git Checkout Sky automation test repo&apos;) {
+            steps {
+                sh &apos;rm -rf *&apos;
+                git &apos;https://github.com/sonups/sky-site-automation.git&apos;
+            }
+        }
+
+        stage(&apos;Dockerize Cypress test automation&apos;) {
+            steps {
+                script {
+                    try {
+                        sh &apos;&apos;&apos;
+                    docker build -t sps89/jenkins-sky .&apos;&apos;&apos;
+                        } catch (err) {
+                        echo err.getMessage()
+                    }
+                }
+            }
+        }
+    }
+}
+
+</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>

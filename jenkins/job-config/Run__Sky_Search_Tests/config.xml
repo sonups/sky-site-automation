@@ -1,0 +1,96 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.40">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.8.4"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.8.4">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.90">
+    <script>pipeline {
+  agent any
+  stages {
+    stage(&apos;Clean up previously running or stopped container&apos;) {
+      steps {
+        script {
+          try {
+            sh &apos;&apos;&apos;
+                    docker kill jenkins-sky&apos;&apos;&apos;
+                        } catch (err) {
+            echo err.getMessage()
+          }
+
+          try {
+            sh &apos;&apos;&apos;
+                    docker rm jenkins-sky&apos;&apos;&apos;
+                        } catch (err) {
+            echo err.getMessage()
+          }
+        }
+      }
+    }
+
+    // stage(&apos;Clean up used reports directories&apos;) {
+    //   steps {
+    //     script {
+    //       try {
+    //         sh &apos;&apos;&apos;
+    //                 rm -rf target/
+    //                 rm -rf reports/
+    //                 rm -rf allure-report
+    //                 &apos;&apos;&apos;
+    //                     } catch (err) {
+    //         echo err.getMessage()
+    //       }
+
+    //     }
+    //   }
+    // }
+
+    stage(&apos;Start Cypress UI tests&apos;) {
+      steps {
+        script {
+          sh &apos;&apos;&apos;
+          docker run -i -e "TAGS=-e TAGS="@sky-search"" --name jenkins-sky sps89/jenkins-sky
+          &apos;&apos;&apos;
+        }
+      }
+    }
+
+    // stage(&apos;Copy report json to allure target folder&apos;) {
+    //   steps {
+    //     script {
+    //       try {
+    //         sh &apos;&apos;&apos;
+
+    //                 mkdir target
+
+    //                 cd ..
+    //                 cp reports target/
+    //                 mv target/reports target/allure-results&apos;&apos;&apos;
+    //                     } catch (err) {
+    //         echo err.getMessage()
+    //       }
+    //     }
+    //   }
+    // }
+
+    // stage(&apos;Allure&apos;) {
+    //   steps {
+    //     allure includeProperties: false, jdk: &apos;&apos;, results: [[path: &apos;target/allure-results&apos;]]
+    //   }
+    // }
+  }
+}
+</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
