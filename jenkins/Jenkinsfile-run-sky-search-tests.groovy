@@ -6,14 +6,14 @@ pipeline {
         script {
           try {
             sh '''
-                    docker kill jenkins-sky'''
+                    docker kill sky-site-automations'''
                         } catch (err) {
             echo err.getMessage()
           }
 
           try {
             sh '''
-                    docker rm jenkins-sky'''
+                    docker rm sky-site-automations'''
                         } catch (err) {
             echo err.getMessage()
           }
@@ -38,12 +38,12 @@ pipeline {
     //   }
     // }
 
-    stage('Start Cypress UI tests') {
+    stage('Start Sky search tests acceptance') {
       steps {
         script {
           sh '''
-          docker run --interactive --name jenkins-sky sps89/jenkins-sky
-          '''
+          docker run --rm -i -e "TAGS=-e TAGS="@sky-search"" --name sky-site-automations sps89/sky-site-automations
+           '''
         }
       }
     }

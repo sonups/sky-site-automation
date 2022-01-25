@@ -57,7 +57,7 @@
       steps {
         script {
           sh &apos;&apos;&apos;
-          docker run -i -e "TAGS=-e TAGS="@ui-tests"" --name jenkins-sky sps89/jenkins-sky
+          docker run --rm -i -e "TAGS=-e TAGS="@ui-tests"" --name sky-site-automations sps89/sky-site-automations
           &apos;&apos;&apos;
         }
       }

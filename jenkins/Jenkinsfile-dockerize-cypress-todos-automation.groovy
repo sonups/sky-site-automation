@@ -13,7 +13,7 @@ pipeline {
                 script {
                     try {
                         sh '''
-                    docker build -t sps89/jenkins-sky .'''
+                    docker build -t sky-site-automations .'''
                         } catch (err) {
                         echo err.getMessage()
                     }
