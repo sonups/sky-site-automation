@@ -5,7 +5,7 @@ import { skyHomePage } from '../../pageobjects/skyHomePage'
 import { cookieManage } from '../../pageobjects/cookieManagePage'
 import { loginPanel } from '../../pageobjects/loginPanel'
 import { editorialPanel } from '../../pageobjects/editorialPanel'
-
+import { dealsPage } from '../../pageobjects/dealsPage'
 
 
 Given('I am on the home page', () => {
@@ -47,8 +47,16 @@ Given('I see a list of deals with a price to it', (dataTable) => {
   // Cypress.Cookies.debug(true);
   cookieManage.acceptCookies();
   cy.title().should('eq','Latest Sky TV deals for new customers | Sky.com');
+
+  
   dataTable.hashes().forEach(elem => {
-    cy.log("Adding "+elem.Bundle+"::Price"+elem.Price);
+    cy.log("Adding "+elem.Bundle+"::Price"+elem.Text);
+    if(elem.Bundle === 'Ultimate TV')
+      dealsPage.verifyUltimateTVDeal(elem.Text);
+     else if(elem.Bundle === 'Sky TV & Sky Sports')
+      dealsPage.verifyskyTVAndSkySportsDeal(elem.Text);
+     else if(elem.Bundle === 'Sky TV, Netflix & Cinema')
+      dealsPage.verifySkyTVNetflixAndCinemaDeal(elem.Text);
     // cy.get('.inventory_item_name').contains(elem.ProductName).parent().parent().next().find('.btn_primary').click();
     });
 })

@@ -16,9 +16,9 @@ Scenario: User sees tiles on the shop page
 Scenario: User sees a list of deals on the deals page
   Given I am on the 'https://www.sky.com/deals' page
    Then I see a list of deals with a price to it
-    | Bundle                   | Price | 
-    | Ultimate TV              | £26   | 
-    | Sky TV & Sky Sports      | £41   | 
-    | Sky TV, Netflix & Cinema | £37   | 
+    | Bundle                   |  Text|
+    | Ultimate TV              |  £26a month for 18 months|
+    | Sky TV & Sky Sports      |  £41a month for 18 months|
+    | Sky TV, Netflix & Cinema |  £37a month for 18 months|
 
 
