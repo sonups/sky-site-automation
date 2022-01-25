@@ -8,7 +8,8 @@
    </p>
 <h3 align="center">Sky website Automation using Cypress (Docker & Jenkins available)</h3>
 <p align="center">
-   Sky website Automation using Cypress. Run all your UI End to end tests silently 
+   Sky website Automation using Page objects model in Cypress JS. Run all your UI End to end tests silently .
+   Cucumber BDD scripts in Cypress
 </p>
 
 Table of contents
@@ -76,7 +77,9 @@ npm run lint
 
  ##### 4. Structure of BDD feature files
     
-    ├── cypress                    
+    ├── cypress   
+    │         └── pageobjects  			# Page objects folder
+    │         └── support			# Step definitions folder
     │         └── integration          
     │                   └
     │                   └── features                # BDD features folder
